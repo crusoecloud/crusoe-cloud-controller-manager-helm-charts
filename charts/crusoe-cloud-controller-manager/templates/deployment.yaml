@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Release.Name }}-controller
+  namespace: kube-system
+spec:
+  replicas: 3
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: {{.Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name }}
+    spec:
+      serviceAccountName: {{ .Release.Name }}-sa
+      priorityClassName: system-cluster-critical
+      {{- with .Values.controller.crusoeccm.image.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      tolerations:
+        # this taint is set by all kubelets running `--cloud-provider=external`
+        # so we should tolerate it to schedule the crusoe ccm
+        - key: "node.cloudprovider.kubernetes.io/uninitialized"
+          value: "true"
+          effect: "NoSchedule"
+        - effect: NoSchedule
+          key: node.kubernetes.io/not-ready
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - {{.Release.Name }}
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+        - name: {{.Release.Name }}
+          image:  "{{ .Values.controller.crusoeccm.image.repository }}:{{ .Values.controller.crusoeccm.image.tag }}"
+          imagePullPolicy: {{ .Values.controller.crusoeccm.image.imagePullPolicy }}
+          command:
+            - "/usr/local/go/bin/crusoe-cloud-controller-manager"
+            - "--leader-elect=true"
+            - "--cloud-provider={{ .Values.controller.crusoeccm.provider }}"
+            - "--cluster-name={{ .Values.controller.crusoeccm.clusterName }}"
+            - "--use-service-account-credentials"
+          envFrom:
+            - secretRef:
+                name: {{.Values.crusoe.secrets.crusoeApiKeys.secretName}}
+                optional: false
+          {{- with .Values.controller.crusoeccm.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
