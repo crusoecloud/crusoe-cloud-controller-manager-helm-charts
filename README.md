@@ -13,14 +13,10 @@ Other configurations will be supported on a best-effort basis.
 
 ## Prerequisites
 
-The examples below assume the intended namespace
-for the CCM is `kube-system`.
+The examples below assume the intended namespace for the CCM is `kube-system`.
 
 ### Setting up credentials
-
-As the CCM will communicate with the Crusoe Cloud API to orchestrate VM / Instance Operations, you will have to set up
-credentials in your Kubernetes cluster which the CCM can then use to communicate with the API. Here is a template `.yaml` file
-which can be modified with your credentials and applied to your cluster.
+The Crusoe controller manager requires access to the Crusoe API to communicate for instance status and metadata. The secret should contain the following keys with base64 encoded values: CRUSOE_PROJECT_ID, CRUSOE_ACCESS_KEY, CRUSOE_SECRET_KEY, and CRUSOE_API_ENDPOINT. As the CCM will interact with the Crusoe Cloud API to manage VM/Instance operations, you need to set up credentials in your Kubernetes cluster. The CCM will use these credentials to communicate with the API. Below is a template `.yaml` file that you can modify with your credentials and apply to your cluster.
 
 ```yaml
 apiVersion: v1

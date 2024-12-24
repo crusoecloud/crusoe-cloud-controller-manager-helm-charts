@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{.Release.Name }}-controller
-  namespace: kube-system
+  name: {{ .Release.Name }}-controller
+  namespace: {{ .Release.Namespace }}
 spec:
   replicas: 3
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: {{.Release.Name }}
+      app: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{.Release.Name }}
+        app: {{ .Release.Name }}
     spec:
       serviceAccountName: {{ .Release.Name }}-sa
       priorityClassName: system-cluster-critical
@@ -36,10 +36,10 @@ spec:
                   - key: app
                     operator: In
                     values:
-                      - {{.Release.Name }}
+                      - {{ .Release.Name }}
               topologyKey: "kubernetes.io/hostname"
       containers:
-        - name: {{.Release.Name }}
+        - name: {{ .Release.Name }}
           image:  "{{ .Values.controller.crusoeccm.image.repository }}:{{ .Values.controller.crusoeccm.image.tag }}"
           imagePullPolicy: {{ .Values.controller.crusoeccm.image.imagePullPolicy }}
           command:
@@ -50,7 +50,7 @@ spec:
             - "--use-service-account-credentials"
           envFrom:
             - secretRef:
-                name: {{ .Values.crusoe.secrets.crusoeApiKeys.secretName}}
+                name: {{ .Values.crusoe.secrets.crusoeApiKeys.secretName }}
                 optional: false
           {{- with .Values.controller.crusoeccm.resources }}
           resources:
