@@ -50,7 +50,7 @@ spec:
             - "--use-service-account-credentials"
           envFrom:
             - secretRef:
-                name: {{.Values.crusoe.secrets.crusoeApiKeys.secretName}}
+                name: {{ .Values.crusoe.secrets.crusoeApiKeys.secretName}}
                 optional: false
           {{- with .Values.controller.crusoeccm.resources }}
           resources:
