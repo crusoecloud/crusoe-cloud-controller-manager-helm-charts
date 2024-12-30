@@ -8,7 +8,6 @@ This repository defines the official Cloud Controller Manager (CCM) Helm Charts 
 
 **The Crusoe CCM is only supported on Crusoe Managed Kubernetes (CMK).** 
 This guide assumes that the user has already set up CMK on Crusoe Cloud.
-
 Other configurations will be supported on a best-effort basis.
 
 ## Prerequisites
