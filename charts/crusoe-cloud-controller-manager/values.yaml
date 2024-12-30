@@ -1,0 +1,25 @@
+crusoe:
+  secrets:
+    crusoeApiKeys:
+      # The Crusoe controller manager requires access to the Crusoe API in order to communicate with Crusoe APIs for Instance Status and metadata.
+      # It is expected that the secret will contain keys: CRUSOE_PROJECT_ID, CRUSOE_ACCESS_KEY, CRUSOE_SECRET_KEY and CRUSOE_API_ENDPOINT containing
+      # the base64 encoded values.
+      secretName: "crusoe-secrets"
+
+controller:
+  crusoeccm:
+    image:
+      repository: ghcr.io/crusoecloud/crusoe-cloud-controller-manager
+      tag: "v0.1.2"
+      imagePullSecrets:
+        - name: registry-credentials
+      imagePullPolicy: IfNotPresent
+    provider: "crusoe"
+    clusterName: "test-cluster"
+    resources:
+      requests:
+        cpu: 100m
+        memory: 200Mi
+      limits:
+        cpu: 100m
+        memory: 200Mi
