@@ -9,11 +9,11 @@ crusoe:
 controller:
   crusoeccm:
     image:
-      repository: registry.gitlab.com/crusoeenergy/island/external/crusoe-cloud-controller-manager
-      tag: "crusoe_ccm"
+      repository: ghcr.io/crusoecloud/crusoe-cloud-controller-manager
+      tag: "v0.1.2"
       imagePullSecrets:
         - name: registry-credentials
-      imagePullPolicy: Always
+      imagePullPolicy: IfNotPresent
     provider: "crusoe"
     clusterName: "test-cluster"
     resources:
