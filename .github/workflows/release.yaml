@@ -3,10 +3,10 @@ name: release
 on:
   push:
     branches:
-      - release
+      - main
 
 jobs:
-  release:
+  main:
     runs-on: ubuntu-latest
     permissions:
       contents: write
