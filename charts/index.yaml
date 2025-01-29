@@ -3,6 +3,26 @@ entries:
   crusoe-cloud-controller-manager:
   - apiVersion: v2
     appVersion: v0.1.0
+    created: "2025-01-29T21:14:40.563124479Z"
+    description: A Helm chart for the Crusoe Cloud Controller Manager
+    digest: d37ffbad0d560c19baa5243e660967b012141c02bf5dcf1e9d94d7668ce68c80
+    home: https://github.com/crusoecloud/crusoe-cloud-controller-manager
+    keywords:
+    - crusoe
+    - ccm
+    kubeVersion: '>=1.17.0-0'
+    maintainers:
+    - name: Crusoe Cloud
+      url: https://github.com/crusoecloud/crusoe-cloud-controller-manager
+    name: crusoe-cloud-controller-manager
+    sources:
+    - https://github.com/crusoecloud/crusoe-cloud-controller-manager
+    type: application
+    urls:
+    - https://github.com/crusoecloud/crusoe-cloud-controller-manager-helm-charts/releases/download/crusoe-cloud-controller-manager-0.1.1/crusoe-cloud-controller-manager-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: v0.1.0
     created: "2025-01-14T18:34:00.182446215Z"
     description: A Helm chart for the Crusoe Cloud Controller Manager
     digest: bee6161b20306cff0bbd9deb2ac127d9736164d5f2defe7f2155f327bf0cdae2
@@ -21,4 +41,4 @@ entries:
     urls:
     - https://github.com/crusoecloud/crusoe-cloud-controller-manager-helm-charts/releases/download/crusoe-cloud-controller-manager-0.1.0/crusoe-cloud-controller-manager-0.1.0.tgz
     version: 0.1.0
-generated: "2025-01-14T18:34:00.182450995Z"
+generated: "2025-01-29T21:14:40.563133846Z"
