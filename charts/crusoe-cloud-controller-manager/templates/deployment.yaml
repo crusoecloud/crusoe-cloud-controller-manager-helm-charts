@@ -38,6 +38,8 @@ spec:
                     values:
                       - {{ .Release.Name }}
               topologyKey: "kubernetes.io/hostname"
+      # needed to remove dependency on CNI
+      hostNetwork: true
       containers:
         - name: {{ .Release.Name }}
           image:  "{{ .Values.controller.crusoeccm.image.repository }}:{{ .Values.controller.crusoeccm.image.tag }}"
